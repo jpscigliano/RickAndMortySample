@@ -13,4 +13,6 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "RickAndMorty"
+enableFeaturePreview("VERSION_CATALOGS")
 include ':app'
+
