@@ -29,10 +29,6 @@ class MainActivity : ComponentActivity() {
             RickAndMortyTheme {
                 Scaffold(
                     modifier = Modifier,
-                    //scaffoldState = rememberScaffoldState(),
-                    snackbarHost = {
-                        //  SnackbarHost(it)
-                    },
                     content = {
                         AppNavigation(
                             navController = navController,

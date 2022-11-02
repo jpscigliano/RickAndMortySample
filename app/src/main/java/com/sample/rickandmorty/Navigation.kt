@@ -29,6 +29,7 @@ private sealed class LeafScreen(val leafRoute: String) {
             "${root.route}/characterList/$characterId?$characterName"
     }
 
+    //TODO
     object CharacterListWithDetail : LeafScreen(leafRoute = "characterListWithDetail")
 }
 
@@ -42,10 +43,6 @@ internal fun AppNavigation(
     AnimatedNavHost(
         navController = navController,
         startDestination = Screen.Feed.route,
-        // enterTransition = { enterTransition(initialState, targetState) },
-        // exitTransition = { exitTransition(initialState, targetState) },
-        // popEnterTransition = { popEnterTransition() },
-        // popExitTransition = { popExitTransition() },
         modifier = modifier,
     ) {
         addFeedTopLevel(navController, widthSizeClass)
@@ -71,7 +68,6 @@ private fun NavGraphBuilder.addFeedTopLevel(
     ) {
         addCharacterList(navController, Screen.Feed)
         addCharacterDetail(navController, Screen.Feed)
-        addCharacterListWithDetail(navController, Screen.Feed)
     }
 }
 
@@ -102,14 +98,3 @@ private fun NavGraphBuilder.addCharacterDetail(
     }
 }
 
-private fun NavGraphBuilder.addCharacterListWithDetail(
-    navController: NavController,
-    root: Screen,
-) {
-    composable(route = LeafScreen.CharacterListWithDetail.createRoute(root)) { backStackEntry ->
-
-        val name: String = backStackEntry.arguments?.getString("characterName") ?: ""
-        // CharacterListWithDetailScreen(name)
-
-    }
-}
