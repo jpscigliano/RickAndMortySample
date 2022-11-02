@@ -14,7 +14,6 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.sample.feedpresentation.characterDetail.DetailScreen
 import com.sample.feedpresentation.characterList.ListScreen
-import com.sample.feedpresentation.characterListDetail.CharacterListWithDetailScreen
 
 internal sealed class Screen(val route: String) {
     object Feed : Screen("Home")
@@ -29,7 +28,8 @@ private sealed class LeafScreen(val leafRoute: String) {
         fun createRoute(root: Screen, characterId: Int, characterName: String) =
             "${root.route}/characterList/$characterId?$characterName"
     }
-    object CharacterListWithDetail:LeafScreen(leafRoute = "characterListWithDetail")
+
+    object CharacterListWithDetail : LeafScreen(leafRoute = "characterListWithDetail")
 }
 
 
@@ -96,7 +96,9 @@ private fun NavGraphBuilder.addCharacterDetail(
 ) {
     composable(route = LeafScreen.CharacterDetail.createRoute(root)) { backStackEntry ->
         val name: String = backStackEntry.arguments?.getString("characterName") ?: ""
-        DetailScreen(toolbarTitle = name, navigateUp = navController::navigateUp)
+        DetailScreen(toolbarTitle = name,
+            navigateUp = navController::navigateUp,
+            showNavigateUp = true)
     }
 }
 
@@ -107,7 +109,7 @@ private fun NavGraphBuilder.addCharacterListWithDetail(
     composable(route = LeafScreen.CharacterListWithDetail.createRoute(root)) { backStackEntry ->
 
         val name: String = backStackEntry.arguments?.getString("characterName") ?: ""
-       // CharacterListWithDetailScreen(name)
+        // CharacterListWithDetailScreen(name)
 
     }
 }

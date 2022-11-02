@@ -50,6 +50,7 @@ fun DetailScreen(
     modifier: Modifier = Modifier,
     toolbarTitle: String,
     navigateUp: () -> Unit,
+    showNavigateUp: Boolean,
 ) {
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     val viewModel: CharacterDetailViewModel = getViewModel()
@@ -77,7 +78,9 @@ fun DetailScreen(
         toolbarTitle = toolbarTitle,
         viewState = viewState,
         scaffoldState = scaffoldState,
-        navigateUp = navigateUp)
+        navigateUp = navigateUp,
+        showNavigateUp=showNavigateUp,
+        )
 
 }
 
@@ -88,11 +91,12 @@ fun DetailScreen(
     viewState: DetailScreenUiState,
     scaffoldState: ScaffoldState,
     navigateUp: () -> Unit,
+    showNavigateUp: Boolean,
 ) {
 
 
     Scaffold(modifier = modifier, topBar = {
-        Toolbar(title = toolbarTitle, showBackArrow = true, onNavigateUp = navigateUp)
+        Toolbar(title = toolbarTitle, showBackArrow = showNavigateUp, onNavigateUp = navigateUp)
     }, content = {
 
         Loading(viewState.isLoading)
@@ -145,7 +149,7 @@ fun CharacterDetailView(
 fun CharacteristicsView(modifier: Modifier, uiState: DetailScreenUiState) {
     Column(Modifier
         .padding(horizontal = 15.dp)
-        .padding(top = 25.dp)) {
+        .padding(top = 25.dp, bottom = 10.dp)) {
 
         Text(
             text = stringResource(id = R.string.characterisc),
@@ -237,7 +241,7 @@ fun CharacteristicColumnTextView(
 @Composable
 fun EpisodesView(modifier: Modifier = Modifier, episodes: List<Episode>) {
     if (episodes.isEmpty().not()) {
-        Column(modifier = modifier.padding(vertical = 15.dp)) {
+        Column(modifier = modifier.padding(vertical = 10.dp)) {
 
             Text(
                 modifier = Modifier.padding(start = 20.dp),
@@ -279,7 +283,7 @@ fun EpisodeCard(episode: Episode) {
 
 
 @Composable
-@Preview
+@Preview(showBackground = true)
 fun MyCharacteristicTextView() {
     RickAndMortyTheme {
         CharacteristicVerticalTextView(modifier = Modifier,
@@ -289,7 +293,7 @@ fun MyCharacteristicTextView() {
 }
 
 @Composable
-@Preview
+@Preview(showBackground = true)
 fun MyCharacteristicTextView2() {
     RickAndMortyTheme {
         CharacteristicColumnTextView(modifier = Modifier,
@@ -299,7 +303,7 @@ fun MyCharacteristicTextView2() {
 }
 
 @Composable
-@Preview
+@Preview(showBackground = true)
 fun MyEpisodeCard() {
     RickAndMortyTheme {
         EpisodeCard(episode = Episode(id = Id(value = 1),
@@ -310,7 +314,7 @@ fun MyEpisodeCard() {
 }
 
 @Composable
-@Preview
+@Preview(showBackground = true)
 fun MyCharacteristicView() {
     RickAndMortyTheme {
         CharacteristicsView(modifier = Modifier,
@@ -340,7 +344,7 @@ fun MyCharacteristicView() {
 }
 
 @Composable
-@Preview
+@Preview(showBackground = true)
 fun MyEpisodesView() {
     RickAndMortyTheme {
         EpisodesView(

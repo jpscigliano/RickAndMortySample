@@ -38,6 +38,13 @@ val RickAndMortyTypography = Typography(
         color = grey400,
         lineHeight = 20.sp
     ),
+    h4 = TextStyle(
+        fontFamily = RicksFont,
+        fontWeight = FontWeight.W500,
+        fontSize = 24.sp,
+        color = grey600,
+        lineHeight = 20.sp
+    ),
     body1 = TextStyle(
         fontFamily = RicksFont,
         fontWeight = FontWeight.W400,

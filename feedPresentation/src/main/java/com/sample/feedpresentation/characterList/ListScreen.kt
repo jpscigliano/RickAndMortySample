@@ -8,6 +8,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -96,7 +100,6 @@ internal fun ListScreen(
 
         Loading(showLoading = listScreenUiModel.isLoading)
 
-
     }, scaffoldState = scaffoldState, snackbarHost = { DefaultSnackbar(snackbarHostState = it) })
 }
 
@@ -110,18 +113,54 @@ private fun ListScreenContent(
     AnimatedVisibility(visible = showContent,
         enter = fadeIn(animationSpec = tween(durationMillis = 500)),
         exit = fadeOut(animationSpec = tween(durationMillis = 500))) {
-        LazyColumn(
-            state = rememberLazyListState(),
-            modifier = modifier.padding(horizontal = 15.dp),
-            contentPadding = PaddingValues(vertical = 30.dp),
-        ) {
-            items(items = characters, itemContent = { character ->
-                CharacterView(
-                    character = character,
-                    onCharacterSelected = onCharacterSelected)
-            })
-        }
+
+        CharactersGridView(modifier = modifier,
+            characters = characters,
+            onCharacterSelected = onCharacterSelected
+        )
+
     }
+}
+
+@Composable
+fun CharactersListView(
+    modifier: Modifier,
+    characters: List<Character>,
+    onCharacterSelected: (character: Character) -> Unit = {},
+) {
+    LazyColumn(
+        state = rememberLazyListState(),
+        modifier = modifier.padding(horizontal = 15.dp),
+        contentPadding = PaddingValues(vertical = 30.dp),
+    ) {
+        items(items = characters, itemContent = { character ->
+            CharacterView(
+                character = character,
+                onCharacterSelected = onCharacterSelected)
+        })
+    }
+}
+
+@Composable
+fun CharactersGridView(
+    modifier: Modifier,
+    characters: List<Character>,
+    onCharacterSelected: (character: Character) -> Unit = {},
+) {
+    LazyVerticalGrid(
+        modifier = modifier.padding(horizontal = 15.dp),
+        state = rememberLazyGridState(),
+        columns = GridCells.Adaptive(180.dp),
+        contentPadding = PaddingValues(vertical = 30.dp),
+        content = {
+            items(
+                items = characters,
+                itemContent = {
+                    CharacterView(character = it, onCharacterSelected = onCharacterSelected)
+                }
+            )
+        }
+    )
 }
 
 @Composable
@@ -157,7 +196,7 @@ private fun CharacterView(
             Spacer(modifier = Modifier.width(16.dp))
 
             Column {
-                Text(text = name, style = MaterialTheme.typography.h2)
+                Text(text = name, style = MaterialTheme.typography.h3)
             }
         }
     }
@@ -183,28 +222,39 @@ private fun MyCharacterView() {
 }
 
 @Composable
-@Preview
-private fun MyListScreen() {
+@Preview(showBackground = true, widthDp = 600)
+private fun MyListScreenCompact() {
     RickAndMortyTheme {
-        ListScreenContent(showContent = true,
-            characters = listOf(Character(id = Id(1),
-                name = Name("Rick"),
-                imageUrl = null,
-                status = Status.ALIVE,
-                gender = Gender.MALE,
-                specie = Specie.HUMANOID,
-                origin = Name("Earth"),
-                location = Name("Earth"),
-                episodesId = listOf(Id(1), Id(2))
-            ),
-                Character(id = Id(2),
-                    name = Name("Morty"),
-                    imageUrl = null,
-                    status = Status.ALIVE,
-                    gender = Gender.MALE,
-                    specie = Specie.HUMANOID,
-                    origin = Name("Earth"),
-                    location = Name("Earth"),
-                    episodesId = listOf(Id(1), Id(2)))))
+        ListScreenContent(showContent = true, characters = characters() + characters())
     }
 }
+
+@Composable
+@Preview(showBackground = true, widthDp = 860)
+private fun MyListScreenMedium() {
+    RickAndMortyTheme {
+        ListScreenContent(showContent = true, characters = characters() + characters())
+    }
+}
+
+fun characters() = listOf(
+    Character(id = Id(1),
+        name = Name("Rick"),
+        imageUrl = null,
+        status = Status.ALIVE,
+        gender = Gender.MALE,
+        specie = Specie.HUMANOID,
+        origin = Name("Earth"),
+        location = Name("Earth"),
+        episodesId = listOf(Id(1), Id(2))
+    ),
+    Character(id = Id(2),
+        name = Name("Morty"),
+        imageUrl = null,
+        status = Status.ALIVE,
+        gender = Gender.MALE,
+        specie = Specie.HUMANOID,
+        origin = Name("Earth"),
+        location = Name("Earth"),
+        episodesId = listOf(Id(1), Id(2)))
+)

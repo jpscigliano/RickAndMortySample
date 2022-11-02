@@ -10,12 +10,15 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/FeedDomain" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/coreX" />
             <option value="$PROJECT_DIR$/coreX/coreXData" />
             <option value="$PROJECT_DIR$/coreX/coreXDomain" />
             <option value="$PROJECT_DIR$/coreX/coreXFramework" />
+            <option value="$PROJECT_DIR$/feedData" />
+            <option value="$PROJECT_DIR$/feedDomain" />
+            <option value="$PROJECT_DIR$/feedFramework" />
+            <option value="$PROJECT_DIR$/feedPresentation" />
           </set>
         </option>
       </GradleProjectSettings>
