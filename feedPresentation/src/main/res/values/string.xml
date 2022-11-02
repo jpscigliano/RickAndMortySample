@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="characterisc">Characteristics </string>
+    <string name="name">Name: </string>
+    <string name="state">State: </string>
+    <string name="gender">Gender: </string>
+    <string name="location">Location </string>
+    <string name="origin">Origin </string>
+    <string name="episodes">Episodes </string>
+
+
+    <string name="error_invalid_character">The character selected is invalid </string>
+    <string name="error_generic">Ups, we encounter an error while updating. Data could be inaccurate.</string>
+    <string name="error_no_internet">Ups, no internet available. Data could be inaccurate</string>
+    <string name="error_unable_to_fetch">Something happened. Unable to fetch data.</string>
+
+
+</resources>
