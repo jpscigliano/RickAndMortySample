@@ -70,6 +70,14 @@ android {
 
 dependencies {
 
+    implementation(project(":coreX:coreXDomain"))
+
+    implementation(project(":feedData"))
+    implementation(project(":feedDomain"))
+    implementation(project(":feedFramework"))
+    implementation(project(":feedPresentation"))
+
+
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime)
     implementation(libs.compose.activity)
