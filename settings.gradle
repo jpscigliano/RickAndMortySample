@@ -17,3 +17,4 @@ enableFeaturePreview("VERSION_CATALOGS")
 include ':app'
 include ':coreX:coreXDomain'
 include ':coreX:coreXData'
+include ':coreX:coreXFramework'
